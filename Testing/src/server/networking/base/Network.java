@@ -1,6 +1,9 @@
-package networking;
+package server.networking.base;
 
-import game.IPlayer;
+import java.util.Map;
+
+import shared.game.PlayerInfo;
+
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
@@ -23,7 +26,8 @@ public abstract class Network {
 		ObjectSpace.registerClasses(kryo);
 		
 		// The interfaces that will be used as remote objects must be registered.
-		kryo.register(IPlayer.class);
+		kryo.register(PlayerInfo.class);
 		kryo.register(InvokeMethod.class);
+		kryo.register(Map.class);
 	}
 }

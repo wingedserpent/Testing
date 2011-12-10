@@ -1,4 +1,4 @@
-package message;
+package shared.message;
 
 public class ClientRequest {
 	private String requestText;
