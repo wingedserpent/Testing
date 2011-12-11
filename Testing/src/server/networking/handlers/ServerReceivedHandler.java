@@ -1,11 +1,11 @@
 package server.networking.handlers;
 
-import server.GameServerDataStore;
+import server.ServerDataStore;
 import shared.game.PlayerInfo;
 
 import com.esotericsoftware.kryonet.Connection;
 
-public class GameServerReceivedHandler {
+public class ServerReceivedHandler {
 	
 	public void handleReceived(Connection connection, Object object) {
 		if(object instanceof String) {
@@ -14,14 +14,14 @@ public class GameServerReceivedHandler {
 			//this is a request to update the playerInfo map in the data store
 			
 			PlayerInfo playerInfo = (PlayerInfo)object;
-			if(GameServerDataStore.getPlayerInfo(connection.getID()) == null) {
+			if(ServerDataStore.getPlayerInfo(connection.getID()) == null) {
 				//initial connect. send welcome messages
 				connection.sendTCP("Welcome to the server!");
-				GameServerDataStore.getServer().sendToAllExceptTCP(connection.getID(), playerInfo.getName() + " connected.");
+				ServerDataStore.getServer().sendToAllExceptTCP(connection.getID(), playerInfo.getName() + " connected.");
 				System.out.println(playerInfo.getName() + " connected.");
 			}
 			//update player in data store
-			GameServerDataStore.updatePlayerInfoMap(playerInfo);
+			ServerDataStore.updatePlayerInfoMap(playerInfo);
 		}
 	}
 }

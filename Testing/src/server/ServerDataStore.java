@@ -8,7 +8,7 @@ import shared.game.PlayerInfo;
 import com.esotericsoftware.kryonet.Server;
 
 //singleton class for storing all data related to a server
-public abstract class GameServerDataStore {
+public abstract class ServerDataStore {
 	//the server object is stored here so any class can send messages through it
 	private static Server server;
 	
@@ -16,7 +16,7 @@ public abstract class GameServerDataStore {
 	private static Map<Integer, PlayerInfo> playerInfoMap = new HashMap<Integer, PlayerInfo>();
 	
 	public static void setServer(Server server) {
-		GameServerDataStore.server = server;
+		ServerDataStore.server = server;
 	}
 	
 	public static Server getServer() {

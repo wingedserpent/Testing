@@ -2,7 +2,7 @@ package client.networking.handlers;
 
 import com.esotericsoftware.kryonet.Connection;
 
-public class GameClientDisconnectedHandler {
+public class ClientDisconnectedHandler {
 
 	public void handleDisconnected(Connection connection) {
 		

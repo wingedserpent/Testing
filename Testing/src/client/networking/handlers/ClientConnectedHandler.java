@@ -1,9 +1,9 @@
-package server.networking.handlers;
+package client.networking.handlers;
 
 import com.esotericsoftware.kryonet.Connection;
 
-public class GameServerConnectedHandler {
-
+public class ClientConnectedHandler {
+	
 	public void handleConnected(Connection connection) {
 		
 	}

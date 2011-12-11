@@ -3,17 +3,17 @@ package server;
 import java.io.IOException;
 
 import server.networking.Network;
-import server.networking.listeners.GameServerListener;
+import server.networking.listeners.ServerListener;
 
 
 import com.esotericsoftware.kryonet.Server;
 
-public class GameServer {
+public class ServerStart {
 	Server server = new Server();
 	
 	public void start() {
 		initialize();
-		server.addListener(new GameServerListener());
+		server.addListener(new ServerListener());
 	}
 	
 	private void initialize() {
@@ -25,14 +25,14 @@ public class GameServer {
 		}
 		
 		//save the server in the data store
-		GameServerDataStore.setServer(server);
+		ServerDataStore.setServer(server);
 		
 		//registers all objects that will be sent over the network for this endpoint
 		Network.register(server);
 	}
 	
 	public static void main(String[] args) {
-		GameServer gameServer = new GameServer();
-		gameServer.start();
+		ServerStart serverStart = new ServerStart();
+		serverStart.start();
 	}
 }

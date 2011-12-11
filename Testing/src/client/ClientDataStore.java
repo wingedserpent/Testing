@@ -4,7 +4,7 @@ import shared.game.PlayerInfo;
 
 import com.esotericsoftware.kryonet.Client;
 
-public abstract class GameClientDataStore {
+public abstract class ClientDataStore {
 	//the client object is stored here so any class can send messages through it
 	private static Client client;
 	
@@ -16,7 +16,7 @@ public abstract class GameClientDataStore {
 	}
 
 	public static void setClient(Client client) {
-		GameClientDataStore.client = client;
+		ClientDataStore.client = client;
 	}
 
 	public static PlayerInfo getPlayer() {
@@ -24,6 +24,6 @@ public abstract class GameClientDataStore {
 	}
 
 	public static void setPlayer(PlayerInfo player) {
-		GameClientDataStore.player = player;
+		ClientDataStore.player = player;
 	}
 }
