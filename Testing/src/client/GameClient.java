@@ -4,21 +4,15 @@ package client;
 import java.io.IOException;
 import java.util.Scanner;
 
-import server.networking.base.Network;
+import server.networking.Network;
 import shared.game.PlayerInfo;
-
-
-
 import client.networking.listeners.GameClientListener;
 
 import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.rmi.ObjectSpace;
 
 public class GameClient {
 	Client client = new Client();
-	ObjectSpace objectSpace = new ObjectSpace();
 	Scanner scanner = new Scanner(System.in);
-	PlayerInfo player;
 	
 	public void start() {
 		initialize();
@@ -31,15 +25,28 @@ public class GameClient {
 		try {
 			client.connect(Network.CONNECT_TIMEOUT, Network.HOST_IP, Network.PORT);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Could not connect to server.");
+			System.exit(1);
 		}
+		
+		//save the client in the data store
+		GameClientDataStore.setClient(client);
 		
 		//registers all objects that will be sent over the network for this endpoint
 		Network.register(client);
 		
-		//init the player with a name
+		initPlayer();
+	}
+	
+	//init the player with a name and store it in the data store
+	private void initPlayer() {
 		System.out.print("Enter your player name: ");
-		player = new PlayerInfo(scanner.next());
+		PlayerInfo player = new PlayerInfo();
+		player.setName(scanner.next());
+		player.setConnectionId(GameClientDataStore.getClient().getID());
+		GameClientDataStore.setPlayer(player);
+		//and send it to the server
+		GameClientDataStore.getClient().sendTCP(GameClientDataStore.getPlayer());
 	}
 	
 	public static void main(String[] args) {

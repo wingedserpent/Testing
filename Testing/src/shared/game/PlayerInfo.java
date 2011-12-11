@@ -4,10 +4,6 @@ package shared.game;
 public class PlayerInfo {
 	private Integer connectionId;
 	private String name;
-	
-	public PlayerInfo(String nameIn) {
-		name = nameIn;
-	}
 
 	public Integer getConnectionId() {
 		return connectionId;

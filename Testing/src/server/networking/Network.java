@@ -1,4 +1,4 @@
-package server.networking.base;
+package server.networking;
 
 import java.util.Map;
 

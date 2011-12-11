@@ -2,8 +2,7 @@ package server;
 
 import java.io.IOException;
 
-import server.networking.base.GameServerDataStore;
-import server.networking.base.Network;
+import server.networking.Network;
 import server.networking.listeners.GameServerListener;
 
 
@@ -26,7 +25,7 @@ public class GameServer {
 		}
 		
 		//save the server in the data store
-		GameServerDataStore.server = server;
+		GameServerDataStore.setServer(server);
 		
 		//registers all objects that will be sent over the network for this endpoint
 		Network.register(server);
