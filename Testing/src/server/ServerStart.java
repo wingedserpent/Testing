@@ -2,8 +2,8 @@ package server;
 
 import java.io.IOException;
 
-import server.networking.Network;
-import server.networking.listeners.ServerListener;
+import server.networking.ServerListener;
+import shared.networking.Network;
 
 
 import com.esotericsoftware.kryonet.Server;

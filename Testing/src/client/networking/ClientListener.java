@@ -1,8 +1,5 @@
-package client.networking.listeners;
+package client.networking;
 
-import client.networking.handlers.ClientConnectedHandler;
-import client.networking.handlers.ClientDisconnectedHandler;
-import client.networking.handlers.ClientReceivedHandler;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;

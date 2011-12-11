@@ -1,9 +1,8 @@
-package server.networking;
+package shared.networking;
 
-import java.util.Map;
+import java.util.HashMap;
 
 import shared.game.PlayerInfo;
-
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
@@ -28,6 +27,6 @@ public abstract class Network {
 		// The interfaces that will be used as remote objects must be registered.
 		kryo.register(PlayerInfo.class);
 		kryo.register(InvokeMethod.class);
-		kryo.register(Map.class);
+		kryo.register(HashMap.class);
 	}
 }

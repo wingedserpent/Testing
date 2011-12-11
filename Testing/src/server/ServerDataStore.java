@@ -23,6 +23,10 @@ public abstract class ServerDataStore {
 		return server;
 	}
 	
+	public static Map<Integer, PlayerInfo> getPlayerInfoMap() {
+		return playerInfoMap;
+	}
+	
 	public static void updatePlayerInfoMap(PlayerInfo playerInfo) {
 		if(playerInfoMap.containsKey(playerInfo.getConnectionId()))
 			playerInfoMap.remove(playerInfo.getConnectionId());

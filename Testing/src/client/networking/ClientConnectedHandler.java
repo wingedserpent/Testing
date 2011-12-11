@@ -1,4 +1,4 @@
-package client.networking.handlers;
+package client.networking;
 
 import com.esotericsoftware.kryonet.Connection;
 

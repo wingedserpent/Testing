@@ -4,9 +4,9 @@ package client;
 import java.io.IOException;
 import java.util.Scanner;
 
-import server.networking.Network;
 import shared.game.PlayerInfo;
-import client.networking.listeners.ClientListener;
+import shared.networking.Network;
+import client.networking.ClientListener;
 
 import com.esotericsoftware.kryonet.Client;
 
@@ -40,9 +40,10 @@ public class ClientStart {
 	
 	//init the player with a name and store it in the data store
 	private void initPlayer() {
-		System.out.print("Enter your player name: ");
 		PlayerInfo player = new PlayerInfo();
-		player.setName(scanner.next());
+		//System.out.print("Enter your player name: ");
+		//player.setName(scanner.next());
+		player.setName("dan");
 		player.setConnectionId(ClientDataStore.getClient().getID());
 		ClientDataStore.setPlayer(player);
 		//and send it to the server
