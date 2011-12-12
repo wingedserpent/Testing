@@ -1,7 +1,6 @@
 package shared.game;
 
-
-public class PlayerInfo {
+public class PlayerState {
 	private Integer connectionId;
 	private String name;
 
@@ -19,5 +18,10 @@ public class PlayerInfo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return "[connectionId: " + connectionId + ", name: " + name + "]";
 	}
 }

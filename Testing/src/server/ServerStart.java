@@ -19,7 +19,7 @@ public class ServerStart {
 	private void initialize() {
 		server.start();
 		try {
-			server.bind(Network.PORT);
+			server.bind(Network.PORT_TCP);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

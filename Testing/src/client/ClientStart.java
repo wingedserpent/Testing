@@ -1,10 +1,9 @@
 package client;
 
-
 import java.io.IOException;
 import java.util.Scanner;
 
-import shared.game.PlayerInfo;
+import shared.game.PlayerState;
 import shared.networking.Network;
 import client.networking.ClientListener;
 
@@ -23,7 +22,9 @@ public class ClientStart {
 	private void initialize() {
 		client.start();
 		try {
-			client.connect(Network.CONNECT_TIMEOUT, Network.HOST_IP, Network.PORT);
+			client.setKeepAliveTCP(Network.KEEP_ALIVE_TCP);
+			client.setTimeout(Network.TIMEOUT_TCP);
+			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP);
 		} catch (IOException e) {
 			System.out.println("Could not connect to server.");
 			System.exit(1);
@@ -40,7 +41,7 @@ public class ClientStart {
 	
 	//init the player with a name and store it in the data store
 	private void initPlayer() {
-		PlayerInfo player = new PlayerInfo();
+		PlayerState player = new PlayerState();
 		//System.out.print("Enter your player name: ");
 		//player.setName(scanner.next());
 		player.setName("dan");

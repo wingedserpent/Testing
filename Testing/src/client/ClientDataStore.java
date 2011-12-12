@@ -1,6 +1,9 @@
 package client;
 
-import shared.game.PlayerInfo;
+import java.util.HashMap;
+import java.util.Map;
+
+import shared.game.PlayerState;
 
 import com.esotericsoftware.kryonet.Client;
 
@@ -9,7 +12,10 @@ public abstract class ClientDataStore {
 	private static Client client;
 	
 	//stores all current player info for this client
-	private static PlayerInfo player = new PlayerInfo();
+	private static PlayerState player = new PlayerState();
+	
+	//a map containing all the players' info that this client knows about, keyed by connection id
+	private static Map<Integer, PlayerState> playerStateMap = new HashMap<Integer, PlayerState>();
 
 	public static Client getClient() {
 		return client;
@@ -19,11 +25,19 @@ public abstract class ClientDataStore {
 		ClientDataStore.client = client;
 	}
 
-	public static PlayerInfo getPlayer() {
+	public static PlayerState getPlayer() {
 		return player;
 	}
 
-	public static void setPlayer(PlayerInfo player) {
+	public static void setPlayer(PlayerState player) {
 		ClientDataStore.player = player;
+	}
+	
+	public static void setPlayerStateMap(Map<Integer, PlayerState> playerStateMap) {
+		ClientDataStore.playerStateMap = playerStateMap;
+	}
+	
+	public static Map<Integer, PlayerState> getPlayerStateMap() {
+		return playerStateMap;
 	}
 }

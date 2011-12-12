@@ -1,7 +1,7 @@
 package server.networking;
 
 import server.ServerDataStore;
-import shared.game.PlayerInfo;
+import shared.game.PlayerState;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -9,11 +9,13 @@ import com.esotericsoftware.kryonet.Connection;
 public class ServerDisconnectedHandler {
 
 	public void handleDisconnected(Connection connection) {
-		PlayerInfo player = ServerDataStore.getPlayerInfo(connection.getID());
+		PlayerState player = ServerDataStore.getPlayerState(connection.getID());
 		ServerDataStore.getServer().sendToAllTCP(player.getName() + " disconnected.");
 		System.out.println(player.getName() + " disconnected.");
 		
 		//remove the player from the data store
-		ServerDataStore.removeFromPlayerInfoMap(player.getConnectionId());
+		ServerDataStore.removeFromPlayerStateMap(player.getConnectionId());
+		
+		System.out.println("server playerStateMap updated to: "+ServerDataStore.getPlayerStateMap().toString());
 	}
 }
