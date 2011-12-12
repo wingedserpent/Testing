@@ -12,7 +12,7 @@ public class ClientMainThread implements Runnable {
 	@Override
 	public void run() {
 		while(t.isAlive()) {
-			System.out.println("running...");
+			//System.out.println("running...");
 		}
 	}
 

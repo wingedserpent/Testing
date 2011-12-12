@@ -7,16 +7,21 @@ import shared.networking.Network;
 
 
 import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.minlog.Log;
 
 public class ServerStart {
 	Server server = new Server();
 	
 	public void start() {
 		initialize();
-		server.addListener(new ServerListener());
 	}
 	
 	private void initialize() {
+		//registers all objects that will be sent over the network for this endpoint
+		Network.register(server);
+		
+		server.addListener(new ServerListener());
+				
 		server.start();
 		try {
 			server.bind(Network.PORT_TCP);
@@ -27,12 +32,10 @@ public class ServerStart {
 		
 		//save the server in the data store
 		ServerDataStore.setServer(server);
-		
-		//registers all objects that will be sent over the network for this endpoint
-		Network.register(server);
 	}
 	
 	public static void main(String[] args) {
+		Log.set(Network.LOG_LEVEL);
 		ServerStart serverStart = new ServerStart();
 		serverStart.start();
 	}
