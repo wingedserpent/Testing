@@ -12,7 +12,12 @@ public class ClientMainThread implements Runnable {
 	@Override
 	public void run() {
 		while(t.isAlive()) {
-			//System.out.println("running...");
+			ClientDataStore.getClient().sendTCP("string...");
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

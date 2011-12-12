@@ -11,18 +11,24 @@ import com.esotericsoftware.kryonet.rmi.ObjectSpace;
 import com.esotericsoftware.kryonet.rmi.ObjectSpace.InvokeMethod;
 import com.esotericsoftware.minlog.Log;
 
+/**
+ * Shared class containing networking utility methods and constants which the server and clients can use, for ubiquity's sake.
+ */
 public abstract class Network {
 	static public final String HOST_IP = "localhost";
 	static public final int PORT_TCP = 54777;
+	static public final int PORT_UDP = 54777;
 	static public final int TIMEOUT_CONNECT = 10000;
 	static public final int TIMEOUT_TCP = 0;
 	static public final int KEEP_ALIVE_TCP = 0;
-	static public final int LOG_LEVEL = Log.LEVEL_INFO;
+	static public final int LOG_LEVEL = Log.LEVEL_DEBUG;
 
 	// These IDs are used to register objects in ObjectSpaces.
-	static public final short OBJECTSPACE_ID_PLAYER = 1;
+	static public final short OBJECTSPACE_ID_PLAYER = 1; //unused
 
-	// This registers objects that are going to be sent over the network.
+	/**
+	 * Registers all objects that will be sent over the network for this endpoint.
+	 */
 	static public void register(EndPoint endPoint) {
 		Kryo kryo = endPoint.getKryo();
 		
@@ -35,6 +41,9 @@ public abstract class Network {
 		kryo.register(HashMap.class);
 	}
 	
+	/**
+	 * Sets default connection settings on this connection.
+	 */
 	static public void setUpConnection(Connection connection) {
 		connection.setKeepAliveTCP(KEEP_ALIVE_TCP);
 		connection.setTimeout(TIMEOUT_TCP);

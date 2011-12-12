@@ -25,8 +25,7 @@ public class ServerReceivedHandler {
 		//update player in data store
 		ServerDataStore.updatePlayerStateMap(playerState);
 		
-		//dispatch the updated map to all players
-		ServerDataStore.getServer().sendToAllTCP(ServerDataStore.getPlayerStateMap());
+		ServerNetworkUtil.sendPlayerStateDeltasToAll();
 		
 		System.out.println("server playerStateMap updated to: "+ServerDataStore.getPlayerStateMap().toString());
 	}

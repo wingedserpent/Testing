@@ -33,9 +33,9 @@ public class ClientStart {
 		client.start();
 		try {
 			Network.setUpConnection(client);
-			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP);
+			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP, Network.PORT_UDP);
 		} catch (IOException e) {
-			System.out.println("Could not connect to server " + Network.HOST_IP + " on port " + Network.PORT_TCP);
+			System.out.println("Could not connect to server " + Network.HOST_IP + " on ports " + Network.PORT_TCP + "tcp, " + Network.PORT_UDP + "udp");
 			System.exit(1);
 		}
 		
