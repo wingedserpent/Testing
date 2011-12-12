@@ -14,19 +14,24 @@ public class ClientStart {
 	Scanner scanner = new Scanner(System.in);
 	
 	public void start() {
-		initialize();
+		initConnection();
 		client.addListener(new ClientListener());
+		
+		initPlayer();
+		
+		//kick off the main client thread
+		new ClientMainThread();
 	}
 	
-	//initialize the connection and player
-	private void initialize() {
+	//initialize the connection
+	private void initConnection() {
 		client.start();
 		try {
 			client.setKeepAliveTCP(Network.KEEP_ALIVE_TCP);
 			client.setTimeout(Network.TIMEOUT_TCP);
 			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP);
 		} catch (IOException e) {
-			System.out.println("Could not connect to server.");
+			System.out.println("Could not connect to server " + Network.HOST_IP + " on port " + Network.PORT_TCP);
 			System.exit(1);
 		}
 		
@@ -35,8 +40,6 @@ public class ClientStart {
 		
 		//registers all objects that will be sent over the network for this endpoint
 		Network.register(client);
-		
-		initPlayer();
 	}
 	
 	//init the player with a name and store it in the data store

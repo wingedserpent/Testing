@@ -21,7 +21,8 @@ public class ServerStart {
 		try {
 			server.bind(Network.PORT_TCP);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Failed to bind to port " + Network.PORT_TCP);
+			System.exit(1);
 		}
 		
 		//save the server in the data store
