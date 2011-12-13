@@ -8,6 +8,9 @@ import client.networking.ClientListener;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
 
+/**
+ * Starts up a client thread, joins to a server, adds a listener, and initializes the client's data store.
+ */
 public class ClientStart {
 	Client client = new Client();
 	
@@ -28,9 +31,9 @@ public class ClientStart {
 		client.start();
 		try {
 			Network.setUpConnection(client);
-			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP);
+			client.connect(Network.TIMEOUT_CONNECT, Network.HOST_IP, Network.PORT_TCP, Network.PORT_UDP);
 		} catch (IOException e) {
-			System.out.println("Could not connect to server " + Network.HOST_IP + " on port " + Network.PORT_TCP);
+			System.out.println("Could not connect to server " + Network.HOST_IP + " on ports " + Network.PORT_TCP + "tcp, " + Network.PORT_UDP + "udp");
 			e.printStackTrace();
 			System.exit(1);
 		}
