@@ -23,11 +23,8 @@ public class ClientStart {
 	
 	//initialize the connection
 	private void initConnection() {
-		//registers all objects that will be sent over the network for this endpoint
 		Network.register(client);
-		
 		client.addListener(new ClientListener());
-		
 		client.start();
 		try {
 			Network.setUpConnection(client);
@@ -38,7 +35,6 @@ public class ClientStart {
 			System.exit(1);
 		}
 		
-		//save the client in the data store
 		ClientDataStore.setClient(client);
 	}
 	

@@ -1,7 +1,7 @@
 package client;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import shared.game.PlayerState;
 
@@ -24,7 +24,7 @@ public abstract class ClientDataStore {
 	/**
 	 * A map containing all currently connected players' state info, keyed by connection id.
 	 */
-	private static Map<Integer, PlayerState> playerStateMap = new HashMap<Integer, PlayerState>();
+	private static Map<Integer, PlayerState> playerStateMap = new ConcurrentHashMap<Integer, PlayerState>();
 	
 	/**
 	 * Returns the {@link #client} object, which can be used to send messages.
@@ -55,11 +55,10 @@ public abstract class ClientDataStore {
 	}
 	
 	/**
-	 * Updates the current {@link #playerStateMap}.
+	 * Updates the current {@link #playerStateMap} with the given delta map.
 	 */
-	public static void updatePlayerStateMap(Map<Integer, PlayerState> playerStateMap) {
-		//TODO this should take in deltas instead of a whole new map
-		ClientDataStore.playerStateMap = playerStateMap;
+	public static void updatePlayerStateMap(Map<Integer, PlayerState> playerStateMapDeltas) {
+		ClientDataStore.playerStateMap.putAll(playerStateMapDeltas);
 	}
 	
 	/**

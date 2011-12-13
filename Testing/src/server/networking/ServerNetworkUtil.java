@@ -12,6 +12,6 @@ public abstract class ServerNetworkUtil {
 	 */
 	public static void sendPlayerStateDeltasToAll() {
 		//TODO make this send deltas instead of the whole map
-		ServerDataStore.getServer().sendToAllUDP(ServerDataStore.getPlayerStateMap());
+		ServerDataStore.getServer().sendToAllUDP(ServerDataStore.getPlayerStateMapDeltas());
 	}
 }

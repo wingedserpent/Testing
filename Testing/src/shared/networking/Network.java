@@ -1,6 +1,6 @@
 package shared.networking;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import shared.game.PlayerState;
 
@@ -38,7 +38,7 @@ public abstract class Network {
 		// The interfaces that will be used as remote objects must be registered.
 		kryo.register(PlayerState.class);
 		kryo.register(InvokeMethod.class);
-		kryo.register(HashMap.class);
+		kryo.register(ConcurrentHashMap.class);
 	}
 	
 	/**

@@ -19,7 +19,7 @@ public class ClientMainThread implements Runnable {
 	}
 	
 	/**
-	 * Inits game values, the display thread, and controls the main running loop for a client.
+	 * Inits game values, the display thread, and controls the main running loop, {@link #tick}, for a client.
 	 */
 	@Override
 	public void run() {

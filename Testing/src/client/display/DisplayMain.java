@@ -20,8 +20,12 @@ public class DisplayMain implements Runnable {
 	long lastFrame;
 	/** frames per second */
 	int fps;
+	/** messages per second */
+	int mps;
 	/** last fps time */
 	long lastFPSTime;
+	/** whether a movement was recorded this frame */
+	boolean hasMoved = false;
 
 	public void run() {
 		try {
@@ -43,7 +47,10 @@ public class DisplayMain implements Runnable {
 			update(delta);
 			renderGL();
 			
-			updatePlayerState();
+			if(hasMoved) {
+				updatePlayerState();
+				hasMoved = false;
+			}
 
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
@@ -56,11 +63,23 @@ public class DisplayMain implements Runnable {
 		// rotate quad
 		rotation += 0.36f * delta;
 		
-		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) x -= 0.35f * delta;
-		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) x += 0.35f * delta;
+		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+			x -= 0.35f * delta;
+			hasMoved = true;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+			x += 0.35f * delta;
+			hasMoved = true;
+		}
 		
-		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) y -= 0.35f * delta;
-		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) y += 0.35f * delta;
+		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+			y -= 0.35f * delta;
+			hasMoved = true;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+			y += 0.35f * delta;
+			hasMoved = true;
+		}
 		
 		// keep quad on the screen
 		if (x < 0) x = 0;
@@ -99,8 +118,9 @@ public class DisplayMain implements Runnable {
 	 */
 	private void updateFPS() {
 		if (getSystemTime() - lastFPSTime > 1000) {
-			Display.setTitle("FPS: " + fps);
+			Display.setTitle("FPS: " + fps + " MPS: " + mps);
 			fps = 0;
+			mps = 0;
 			lastFPSTime += getSystemTime() - lastFPSTime; //was 1000, but isn't this more accurate?
 		}
 		fps++;
@@ -133,11 +153,14 @@ public class DisplayMain implements Runnable {
 			GL11.glVertex2f(x - 50, y + 50);
 			GL11.glEnd();
 		GL11.glPopMatrix();
+		
+		//TODO draw the other players
 	}
 	
 	private void updatePlayerState() {
 		ClientDataStore.getPlayerState().setXPos(x);
 		ClientDataStore.getPlayerState().setYPos(y);
 		ClientNetworkUtil.sendPlayerState(); //TODO this shouldn't really be here
+		mps++;
 	}
 }

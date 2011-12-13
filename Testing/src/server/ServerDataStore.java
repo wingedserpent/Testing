@@ -1,7 +1,7 @@
 package server;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import shared.game.PlayerState;
 
@@ -15,10 +15,10 @@ public abstract class ServerDataStore {
 	private static Server server;
 	
 	/** A map containing all currently connected players' state info, keyed by connection id. */
-	private static Map<Integer, PlayerState> playerStateMap = new HashMap<Integer, PlayerState>();
+	private static Map<Integer, PlayerState> playerStateMap = new ConcurrentHashMap<Integer, PlayerState>();
 	
 	/** A map containing all changes to the playerStateMap since this map was last cleared. */
-	private static Map<Integer, PlayerState> playerStateMapDeltas = new HashMap<Integer, PlayerState>();
+	private static Map<Integer, PlayerState> playerStateMapDeltas = new ConcurrentHashMap<Integer, PlayerState>();
 	
 	/**
 	 * Sets the {@link #server} in this data store so that any class may use it to send messages.
