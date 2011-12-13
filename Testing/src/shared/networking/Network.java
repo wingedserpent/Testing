@@ -12,7 +12,7 @@ import com.esotericsoftware.kryonet.rmi.ObjectSpace.InvokeMethod;
 import com.esotericsoftware.minlog.Log;
 
 /**
- * Shared class containing networking utility methods and constants which the server and clients can use, for ubiquity's sake.
+ * Abstract shared class containing networking utility methods and constants which the server and clients can use, for ubiquity's sake.
  */
 public abstract class Network {
 	static public final String HOST_IP = "localhost";

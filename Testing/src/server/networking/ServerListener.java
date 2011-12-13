@@ -1,9 +1,11 @@
 package server.networking;
 
-
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+/**
+ * Listens for incoming notifications and forwards them to the appropriate handler.
+ */
 public class ServerListener extends Listener {
 	ServerConnectedHandler connectedHandler = new ServerConnectedHandler();
 	ServerReceivedHandler receivedHandler = new ServerReceivedHandler();

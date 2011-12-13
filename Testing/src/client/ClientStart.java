@@ -10,6 +10,9 @@ import client.networking.ClientListener;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
 
+/**
+ * Starts up a client thread, joins to a server, adds a listener, and initializes the client's data store.
+ */
 public class ClientStart {
 	Client client = new Client();
 	Scanner scanner = new Scanner(System.in);
@@ -50,9 +53,9 @@ public class ClientStart {
 		//player.setName(scanner.next());
 		player.setName("dan");
 		player.setConnectionId(ClientDataStore.getClient().getID());
-		ClientDataStore.setPlayer(player);
+		ClientDataStore.setPlayerState(player);
 		//and send it to the server
-		ClientDataStore.getClient().sendTCP(ClientDataStore.getPlayer());
+		ClientDataStore.getClient().sendTCP(ClientDataStore.getPlayerState());
 	}
 	
 	public static void main(String[] args) {

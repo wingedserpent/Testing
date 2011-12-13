@@ -1,5 +1,8 @@
 package shared.game;
 
+/**
+ * Stores all current state information for a player.
+ */
 public class PlayerState {
 	private Integer connectionId;
 	private String name;

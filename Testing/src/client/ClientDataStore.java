@@ -7,36 +7,64 @@ import shared.game.PlayerState;
 
 import com.esotericsoftware.kryonet.Client;
 
+/**
+ * Abstract class for storing all state data related to a client.
+ */
 public abstract class ClientDataStore {
-	//the client object is stored here so any class can send messages through it
+	/**
+	 * The current {@link Client} object the client is using.
+	 */
 	private static Client client;
 	
-	//stores all current player info for this client
-	private static PlayerState player = new PlayerState();
+	/**
+	 * Stores the current {@link PlayerState} of this player.
+	 */
+	private static PlayerState playerState = new PlayerState();
 	
-	//a map containing all the players' info that this client knows about, keyed by connection id
+	/**
+	 * A map containing all currently connected players' state info, keyed by connection id.
+	 */
 	private static Map<Integer, PlayerState> playerStateMap = new HashMap<Integer, PlayerState>();
-
+	
+	/**
+	 * Returns the {@link #client} object, which can be used to send messages.
+	 */
 	public static Client getClient() {
 		return client;
 	}
-
+	
+	/**
+	 * Sets the {@link #client} in this data store so that any class may use it to send messages.
+	 */
 	public static void setClient(Client client) {
 		ClientDataStore.client = client;
 	}
-
-	public static PlayerState getPlayer() {
-		return player;
-	}
-
-	public static void setPlayer(PlayerState player) {
-		ClientDataStore.player = player;
+	
+	/**
+	 * Returns the current {@link #playerState}.
+	 */
+	public static PlayerState getPlayerState() {
+		return playerState;
 	}
 	
-	public static void setPlayerStateMap(Map<Integer, PlayerState> playerStateMap) {
+	/**
+	 * Sets the current {@link #playerState}.
+	 */
+	public static void setPlayerState(PlayerState playerState) {
+		ClientDataStore.playerState = playerState;
+	}
+	
+	/**
+	 * Updates the current {@link #playerStateMap}.
+	 */
+	public static void updatePlayerStateMap(Map<Integer, PlayerState> playerStateMap) {
+		//TODO this should take in deltas instead of a whole new map
 		ClientDataStore.playerStateMap = playerStateMap;
 	}
 	
+	/**
+	 * Returns the current {@link #playerStateMap}.
+	 */
 	public static Map<Integer, PlayerState> getPlayerStateMap() {
 		return playerStateMap;
 	}
