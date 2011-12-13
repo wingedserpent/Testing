@@ -27,6 +27,7 @@ public class ServerStart {
 			server.bind(Network.PORT_TCP);
 		} catch (IOException e) {
 			System.out.println("Failed to bind to port " + Network.PORT_TCP);
+			e.printStackTrace();
 			System.exit(1);
 		}
 		
