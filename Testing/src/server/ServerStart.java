@@ -16,6 +16,9 @@ public class ServerStart {
 	
 	public void start() {
 		initialize();
+		
+		//kick off the main server thread
+		new ServerMainThread();
 	}
 	
 	private void initialize() {

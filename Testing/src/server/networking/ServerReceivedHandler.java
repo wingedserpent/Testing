@@ -18,23 +18,20 @@ public class ServerReceivedHandler {
 			System.out.println(object.toString());
 		} else if (object instanceof PlayerState) {
 			PlayerState playerState = (PlayerState)object;
-			handlePlayerInfo(connection, playerState);
+			handlePlayerState(connection, playerState);
 		}
 	}
 	
 	/**
-	 * Handles the case of an incoming playerState. Updates the playerStateMap in the data store and dispatches deltas to clients.
+	 * Handles the case of an incoming playerState. Updates playerStateMap and playerStateMapDeltas in the data store.
 	 */
-	private void handlePlayerInfo(Connection connection, PlayerState playerState) {
+	private void handlePlayerState(Connection connection, PlayerState playerState) {
 		if(ServerDataStore.getPlayerState(connection.getID()) == null) {
 			//the player has just connected
 			initialConnect(connection, playerState);
 		}
-		//update player in data store
 		ServerDataStore.updatePlayerStateMap(playerState);
-		
-		ServerNetworkUtil.sendPlayerStateDeltasToAll();
-		
+		ServerDataStore.addPlayerStateMapDelta(playerState);
 		System.out.println("server playerStateMap updated to: "+ServerDataStore.getPlayerStateMap().toString());
 	}
 	
