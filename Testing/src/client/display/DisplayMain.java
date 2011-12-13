@@ -7,10 +7,13 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
-public class DisplayMain {
+import client.ClientDataStore;
+import client.networking.ClientNetworkUtil;
+
+public class DisplayMain implements Runnable {
 	
 	/** position of quad */
-	float x = 400, y = 300;
+	float x = ClientDataStore.getPlayerState().getXPos(), y = ClientDataStore.getPlayerState().getYPos();
 	/** angle of quad rotation */
 	float rotation = 0;
 	/** time at last frame */
@@ -20,7 +23,7 @@ public class DisplayMain {
 	/** last fps time */
 	long lastFPSTime;
 
-	public void start() {
+	public void run() {
 		try {
 			Display.setDisplayMode(new DisplayMode(800, 600));
 			Display.create();
@@ -39,6 +42,8 @@ public class DisplayMain {
 			
 			update(delta);
 			renderGL();
+			
+			updatePlayerState();
 
 			Display.update();
 			Display.sync(60); // cap fps to 60fps
@@ -128,5 +133,11 @@ public class DisplayMain {
 			GL11.glVertex2f(x - 50, y + 50);
 			GL11.glEnd();
 		GL11.glPopMatrix();
+	}
+	
+	private void updatePlayerState() {
+		ClientDataStore.getPlayerState().setXPos(x);
+		ClientDataStore.getPlayerState().setYPos(y);
+		ClientNetworkUtil.sendPlayerState(); //TODO this shouldn't really be here
 	}
 }

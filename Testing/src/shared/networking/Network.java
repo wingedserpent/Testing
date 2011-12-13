@@ -21,7 +21,7 @@ public abstract class Network {
 	static public final int TIMEOUT_CONNECT = 10000;
 	static public final int TIMEOUT_TCP = 0;
 	static public final int KEEP_ALIVE_TCP = 0;
-	static public final int LOG_LEVEL = Log.LEVEL_DEBUG;
+	static public final int LOG_LEVEL = Log.LEVEL_INFO;
 
 	// These IDs are used to register objects in ObjectSpaces.
 	static public final short OBJECTSPACE_ID_PLAYER = 1; //unused

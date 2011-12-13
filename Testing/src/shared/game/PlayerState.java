@@ -26,10 +26,10 @@ public class PlayerState {
 	
 	@Override
 	public String toString() {
-		return "[connectionId: " + connectionId + ", name: " + name + "]";
+		return "[connectionId: " + connectionId + ", name: " + name + ", xPos: " + xPos + ", yPos: " + yPos + "]";
 	}
 
-	public Float getxPos() {
+	public Float getXPos() {
 		return xPos;
 	}
 
@@ -41,7 +41,7 @@ public class PlayerState {
 		return yPos;
 	}
 
-	public void setyPos(Float yPos) {
+	public void setYPos(Float yPos) {
 		this.yPos = yPos;
 	}
 }
