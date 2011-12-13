@@ -29,6 +29,7 @@ public class ServerStart {
 			server.bind(Network.PORT_TCP, Network.PORT_UDP);
 		} catch (IOException e) {
 			System.out.println("Failed to bind to ports " + Network.PORT_TCP + "tcp, " + Network.PORT_UDP + "udp");
+			e.printStackTrace();
 			System.exit(1);
 		}
 		
